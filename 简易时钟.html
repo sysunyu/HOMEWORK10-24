@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0; padding:0;}
+        .clock{
+            width:300px;
+            height: 300px;
+            border:3px solid #000;
+            border-radius:50%;
+            position:absolute;
+            left:50%;
+            top:50%;
+            margin-left:-150px;
+            margin-top:-150px;
+        }
+        .hou{
+            width:10px;
+            height:100px;
+            background:#000;
+            border-radius:50% 50% 0 0;
+            position:absolute;
+            left:50%;
+            top:50px;
+            -webkit-transform-origin: bottom;
+        }
+        .min{
+            width:6px;
+            height:120px;
+            background:#000;
+            border-radius:50% 50% 0 0 ;
+            position:absolute;
+            left:50%;
+            top:30px;
+            -webkit-transform-origin: bottom;
+        }
+        .sec{
+            width:4px;
+            height:140px;
+            background:red;
+            border-radius:50% 50% 0 0;
+            position:absolute;
+            left:50%;
+            top:10px;
+            -webkit-transform-origin: bottom;
+        }
+        .cap{
+            width:20px;
+            height:20px;
+            border-radius:50%;
+            background:-webkit-radial-gradient(#fff 0,black 20px);
+            position:absolute;
+            left:146px;
+            top:140px;
+        }
+        .clock span{
+            width:4px;
+            height:10px;
+            position:absolute;
+            left:50%;
+            top:0;
+            background:#000;
+            margin-left:-2px;
+            -webkit-transform-origin:center 150px;
+        }
+        .clock span.big_scale{
+            width:6px;
+            height:18px;
+            margin-left:-3px;
+        }
+        .big_scale i{
+            position:absolute;
+            left:50%;
+            top:20px;
+            text-align:center;
+            width:30px;
+            margin-left:-15px;
+            font-style:normal;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var oClock = document.querySelector('.clock');
+            var oHou = document.querySelector('.hou');
+            var oMin = document.querySelector('.min');
+            var oSec = document.querySelector('.sec');
+            var N=60;
+            for(var i=0;i<N;i++){
+                var oS = document.createElement('span');
+                oS.style.WebkitTransform = 'rotate('+i*6+'deg)';
+                if(i%5==0){
+                    oS.className='big_scale';
+                    oS.innerHTML = '<i>'+(i/5||12)+'<\/i>';
+                    var oI = oS.children[0];
+                    oI.style.WebkitTransform = 'rotate('+-i*6+'deg)';
+             ;
+                }
+                oClock.appendChild(oS);
+            }
+            function clock(){
+                var oDate = new Date();
+                var h = oDate.getHours();
+                var m = oDate.getMinutes;
+                var s = oDate.getSeconds()
+                var ms = oDate.getMilliseconds();
+                oHou.style.WebkitTransform='rotate('+(h*30+m*60*30)+'deg)';
+                oMin.style.WebkitTransform='rotate('+(m*6+s/60*6)+'deg)';
+                oSec.style.webkitTransform='rotate('+(s*6+ms/1000*6)+'deg)';
+
+            }
+            clock();
+            setInterval(clock,1);
+        }
+    </script>
+</head>
+<body>
+    <div class="clock">
+        <div class="hou"></div>
+        <div class="min"></div>
+        <div class="sec"></div>
+        <div class="cap"></div>
+    </div>
+</body>
+</html>
