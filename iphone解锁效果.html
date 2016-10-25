@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0; padding:0;}
+        body{
+            background:#cc6666;
+        }
+        div{
+            width:300px;
+            font-size:40px;
+            font-weight:bold;
+            margin:200px auto;
+            color:rgba(0,0,0,0);
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var oDiv = document.querySelector('div');
+            var n=0;
+            function bac(n){
+                oDiv.style.background='-webkit-linear-gradient(-45deg,#000 '+n+'%,#fff '+(n+15)+'%,#000 '+(n+20)+'%)';
+                oDiv.style.WebkitBackgroundClip='text';
+            }
+            bac(n);
+            setInterval(function(){
+                n++;
+                bac(n%95)
+            },30)
+        }
+    </script>
+</head>
+<body>
+    <div>移动滑块解锁</div>
+
+</body>
+</html>
